@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Slutprojekt_Prog2
 {
@@ -10,11 +11,12 @@ namespace Slutprojekt_Prog2
             hp = 100;
             strength = 10;
             speed = 15;
+            name ="bob";
         }
 
         public void ShowStats()
         {
-            
+            Console.WriteLine(name);
             Console.WriteLine(GetHp());
             Console.WriteLine(GetStrength());
             Console.WriteLine(GetSpeed());

@@ -12,13 +12,18 @@ namespace Slutprojekt_Prog2
             Player player = new Player();
             
             //Lista för att skapa motståndare
-            List<Character> EnemyList = new List<Character>();
+            List<Opponent> EnemyList = new List<Opponent>();
+
             //Lägger till instans av motståndare i listan.
-            EnemyList.Add(new Opponent());
+            for (int z = 0; z < 7; z++)
+            {   
+                EnemyList.Add(new Opponent());
+                Console.WriteLine(EnemyList[z].GetName2);
+            }
 
-
-
+            //Skriver ut spelarens "Stats" 
             ShowStats(player);
+            
             Console.ReadLine();
         }
 
@@ -28,5 +33,7 @@ namespace Slutprojekt_Prog2
             spelare.ShowStats();
 
         }
+
+        
     }
 }
