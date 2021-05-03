@@ -9,11 +9,12 @@ namespace Slutprojekt_Prog2
     {
         static void Main(string[] args)
         {
-
+            //Skapar en instans av spelaren. Se Player.cs
             Player player = new Player();
 
-            //Lista för att skapa motståndare
+            //Lista för att skapa motståndare, se Opponent.cs
             List<Opponent> EnemyList = new List<Opponent>();
+
             //Lägger till instans av motståndare i listan.
             for (int z = 0; z < 5; z++)
             {
@@ -21,34 +22,48 @@ namespace Slutprojekt_Prog2
                 // Console.WriteLine(EnemyList[z].GetName2);
             }
 
-            Console.WriteLine("Start Combat");
             bool FightActive = true;
-            int round = 1;
-            while (FightActive)
+            int enemyNumber = 0;
+
+            //Gamestate
+            while (FightActive && enemyNumber < 5)
             {
-                //Spelarens tur att slå
-                EnemyList[0].getHp = EnemyList[0].getHp - playerTurn(player);
+                //skriver ut spelare och motståndarns hp, baserat på nummer. 
+                RoundStats(player, EnemyList, enemyNumber);
 
-                //Motståndarens hp
-                Console.WriteLine("enemy hp: " + EnemyList[0].getHp);
+                //Motståndares hp dras bort baserat på vilket val spelaren gör
+                EnemyList[enemyNumber].getHp = EnemyList[enemyNumber].getHp - playerTurn(player);
 
-                //Motståndares tur att slå
-                player.getHp = player.getHp - EnemyList[0].dealDamage;
-                
-                //spelarens hp
-                Console.WriteLine("player hp: " + player.getHp);
+                //Spelarens hp dras bort baserat på vilken attack som ligger i motståndarens queue.
+                player.getHp = player.getHp - EnemyList[enemyNumber].dealDamage;
 
-                //ökar round nummret
-                round++;
-                Console.WriteLine("Round: " + round);
+                //Rensar konsolen
+                Console.Clear();
+
+                //Kollar om motståndaren lever, om den dog, går den vidare till nästa
+                enemyNumber = CheckEnemyAlive(enemyNumber, EnemyList);
 
             }
-
-            //Skriver ut spelarens "Stats" 
-            ShowStats(player);
-
             Console.ReadLine();
         }
+
+        //Skriver ut spelare och motståndarens hp
+        static void RoundStats(Player player, List<Opponent> enemy, int enemyNumber)
+        {
+            Console.WriteLine("player hp: " + player.getHp);
+            System.Console.WriteLine("enemy hp: " + enemy[enemyNumber].getHp);
+        }
+
+        //Kollar om motståndaren lever, om inte går nummret upp, vilket byter motståndare. 
+        static int CheckEnemyAlive(int number, List<Opponent> enemy)
+        {
+            if(enemy[number].getHp == 0)
+            {
+                number++;
+            }
+            return number;
+        }
+        
 
         //metod för att visa spelaren stats
         public static void ShowStats(Player spelare)
@@ -57,6 +72,7 @@ namespace Slutprojekt_Prog2
 
         }
 
+        //Frågar vilken attack man vill göra
         static int playerTurn(Player spelare)
         {
             Console.WriteLine("What attack?");
@@ -64,21 +80,23 @@ namespace Slutprojekt_Prog2
             string svar = playerInput(Console.ReadLine());
             if (svar == "1")
             {
-                return spelare.ChoseLightPunch();
+                return spelare.ChooseLightPunch();
                 
             }
             else if (svar == "2")
             {
-                return spelare.ChoseLightPunch();
+                return spelare.ChooseLightPunch();
             }
             else if (svar == "3")
             {
-                return spelare.ChoseKick();
+                return spelare.ChooseKick();
             }
             else
             {return 0;}
         }
 
+        //Om svaret är 1 2 eller 3 så blir key false, vilket bryter loopen
+        //Om svaret inte är 1 2 eller 3 skrivs ett felmeddelande ut o man får försöka igen. 
         static string playerInput(string svar)
         {
             bool key = true;

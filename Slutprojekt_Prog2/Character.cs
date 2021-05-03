@@ -5,10 +5,11 @@ namespace Slutprojekt_Prog2
 {
     public class Character
     {
+        //Variabler
         protected string name;
         protected int hp;
-        protected int strength;
-        protected int speed;
+        // protected int strength;
+        // protected int speed;
 
 
         protected void GetHurt(int ammount)
@@ -16,6 +17,7 @@ namespace Slutprojekt_Prog2
             hp -= ammount;
         }
 
+        //Olika attacker som väljer hur mycket skada attacken gör. 
         protected int LightPunch()
         {
             return 10;
@@ -28,7 +30,7 @@ namespace Slutprojekt_Prog2
         {
             return 15;
         }
-        
+        //Get set för hp. 
         public int getHp
         {
             get
