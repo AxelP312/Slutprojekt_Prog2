@@ -28,6 +28,18 @@ namespace Slutprojekt_Prog2
         {
             return 15;
         }
+        
+        public int getHp
+        {
+            get
+            {
+                return hp;
+            }
+            set
+            {
+                hp = Math.Max(value, 0);
+            }
+        }
 
     }
 }

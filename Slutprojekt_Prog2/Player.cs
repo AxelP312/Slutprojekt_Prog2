@@ -22,6 +22,21 @@ namespace Slutprojekt_Prog2
             Console.WriteLine(GetSpeed());
         }
 
+        public int ChoseLightPunch()
+        {
+            return LightPunch();
+        }
+
+        public int ChoseHeavyPunch()
+        {
+            return HeavyPunch();
+        }
+
+        public int ChoseKick()
+        {
+            return Kick();
+        }
+
         private int GetHp()
         {
             return hp;

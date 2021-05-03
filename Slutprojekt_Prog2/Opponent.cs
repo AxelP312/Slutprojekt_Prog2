@@ -11,7 +11,7 @@ namespace Slutprojekt_Prog2
             hp = 100;
             strength = 10;
             speed = 15;
-            CreateAttacks();
+            AttackList();
         }
 
         private string RandomizeName()
@@ -32,7 +32,16 @@ namespace Slutprojekt_Prog2
                 return name;
             }
         }
-        private void CreateAttacks()
+
+        public int dealDamage
+        {
+            get
+            {
+                return ChooseAttack();
+            }
+        }
+
+        public void AttackList()
         {
             Queue<int> AttackSequence = new Queue<int>();
 
